@@ -8,7 +8,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger/swagger_output.json');
 const swaggerOptions = { customCssUrl: './swagger-ui.css' }
 const routes = require('./src/routes');
-const authDocProducao = require('./src/middlewares/authDoc');
+// const authDocProducao = require('./src/middlewares/authDoc');
 const app = express();
 require('dotenv').config();
 
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Documentação do Swagger
 if (process.env.NODE_ENV !== 'test') {
   app.get('/', (req, res) => { /* #swagger.ignore = true */ res.redirect('/doc'); });
-  app.use('/doc', authDocProducao, swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
+  app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
 }
 
 // Restante dos endpoints, rotas da API
