@@ -51,4 +51,22 @@ router.put('/editar/:id', authUser, connectBD, async function (req, res) {
   }
 });
 
+router.get('/obter/usuario', authUser, connectBD, async function (req, res) {
+  try {
+    // #swagger.tags = ['Tarefa']
+    // #swagger.description = "Endpoint para obter todas as tarefas do usuário logado"
+    const usuarioLogado = req.usuarioJwt.id;
+    const respostaBD = await EsquemaTarefa.find({ usuarioCriador: usuarioLogado }).populate('usuarioCriador');
+
+    res.status(200).json({
+      status: "OK",
+      statusMensagem: "Tarefas listadas na resposta com sucesso",
+      resposta: respostaBD
+    })
+
+  } catch (error) {
+    return tratarErrosEsperados(res, error);
+  }
+});
+
 module.exports = router;
