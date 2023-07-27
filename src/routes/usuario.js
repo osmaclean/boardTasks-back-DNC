@@ -2,7 +2,7 @@ const express = require('express');
 const connectBD = require('../middlewares/connectBD');
 const tratarErrosEsperados = require('../functions/tratarErrosEsperados');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const EsquemaUsuario = require('../models/usuario');
 const router = express.Router();
 
